@@ -12,7 +12,7 @@
       margin:0;
       width: 100%;
       height: 100%;
-      color:white;
+      color:rgb(231, 231, 231);
     }
     #app{
       width:100%;
@@ -21,8 +21,9 @@
       background-color: #121212;
     }
     .main{
-      width:800px;
+      width:1200px;
       margin:0 auto;
+      padding:0 10px;
       background-color: #0d1117;
     }
     .head{
@@ -44,7 +45,7 @@
       margin: 15px 0;
     }
     .search-input{
-      color:white;
+      color:rgb(231, 231, 231);
       background-color:#0d1117;
       border:1px solid #4a4a4a;
       font-size: 1.5em;
@@ -66,6 +67,9 @@
     .link-target,:link,:any-link{
       text-decoration: none;
       color:rgb(0, 145, 46);
+    }
+    .sortable{
+      cursor:pointer;
     }
     [v-cloak] {
       display: none;
@@ -103,18 +107,41 @@
         <table>
           <tbody >
             <thead>
-              <td>ID</td>
+              <td class="sortable" @click="setSort('id', i=>i.id)">
+                ID 
+                <template v-if="sortBy.keyName==='id'">
+                  {{ sortBy.desc ? '↓' : '↑' }}
+                </template>
+                <template v-else>↕</template>
+              </td>
               <td>文件名</td>
+              <td class="sortable" @click="setSort('score', i=>i.rate.score, true)">
+                评分
+                <template v-if="sortBy.keyName==='score'">
+                  {{ sortBy.desc ? '↓' : '↑' }}
+                </template>
+                <template v-else>↕</template>
+              </td>
               <td>大小</td>
               <td>下载链接</td>
             </thead>
             <tr class="list-item" 
-              v-for="bookItem of filtedList">
+              v-for="bookItem of filtedList"
+              :key="bookItem.id">
               <td class="item-info id">
                 {{ bookItem?.id }}
               </td>
               <td class="item-info title">
                 {{ bookItem?.title }}
+              </td>
+              <td class="item-info rate" width="200" :title="[
+                `仙草: ${bookItem?.rate?.XianCao}`,
+                `粮草: ${bookItem?.rate?.LiangCao}`,
+                `干草: ${bookItem?.rate?.GanCao}`,
+                `枯草: ${bookItem?.rate?.KuCao}`,
+                `毒草: ${bookItem?.rate?.DuCao}`,
+              ].join('\n')">
+                {{bookItem?.rate?.score ?? '--'}}  /  {{bookItem?.rate?.sum}} 条评价
               </td>
               <td class="item-info size" width="100">
                 {{ bookItem?.size }}
