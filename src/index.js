@@ -100,6 +100,9 @@ createApp({
         this.sortBy.desc = defaultDesc;
         this.sortBy.keyName = keyName;
       }
+    },
+    errorHandler(e){
+      console.log(e)
     }
   },
 }).mount("#app")

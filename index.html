@@ -148,7 +148,7 @@
               </td>
               <td class="item-info link" width="180">
                 <div class="link-item" v-for="(link,index) of bookItem.links">
-                  <a :href="link" class="link-target" download>
+                  <a :href="link" class="link-target" download @error="errorHandler">
                     链接{{index+1}}
                   </a>
                 </div>
