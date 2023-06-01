@@ -99,7 +99,7 @@
             共 {{db.length }} 个结果，数据来源: 2022/8 抓取时站点的数据，不包含历史上已经被删除的部分
           </div>
         </div>
-        <div class="info" style="color:#b25c00">由于现代浏览器的安全限制，如果点击下载没有反应，可以复制链接后使用工具下载，或者右键链接另存为 </div>
+        <div class="info" style="color:#b25c00">下载链接已失效</div>
         <hr>
       </div>
       
@@ -150,7 +150,7 @@
               <td class="item-info link" width="180">
                 <div class="link-item" v-for="(link,index) of bookItem.links">
                   <a :href="link" class="link-target" download>
-                    链接{{index+1}}
+                    <del>链接{{index+1}}</del>
                   </a>
                 </div>
               </td>
